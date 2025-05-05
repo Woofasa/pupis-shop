@@ -2,6 +2,15 @@ import Card from './components/Card';
 import Header from './components/Header';
 import CartDrawer from './components/CartDrawer';
 
+const arr = [
+  { id: 1, name: 'Кошка срущая', price: 14800, imageURL: '/img/animals/cats/krisa.png' },
+  { id: 2, name: 'Дурында', price: 12342, imageURL: '/img/animals/cats/cat-na-negative.png' },
+  { id: 3, name: 'Срака', price: 12342, imageURL: '/img/animals/cats/cat-srushiy.png' },
+  { id: 4, name: 'Жопа', price: 12342, imageURL: '/img/animals/cats/cat-v-otrube.png' },
+];
+
+const a = 1;
+
 function App() {
   return (
     <div className="wrapper default">
@@ -16,11 +25,9 @@ function App() {
           </div>
         </div>
         <div className="card-list">
-          <Card name={'Кошка дурёшка'} price={322} />
-          <Card name={'Дурында'} price={500} />
-          <Card name={'Срака'} price={2400} />
-          <Card name={'Кака'} price={1200} />
-          <Card name={'Попа'} price={252300} />
+          {arr.map((i) => (
+            <Card key={i.id} name={i.name} price={i.price} imageURL={i.imageURL} />
+          ))}
         </div>
       </div>
     </div>
