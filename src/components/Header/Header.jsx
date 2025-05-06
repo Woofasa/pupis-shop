@@ -1,18 +1,20 @@
+import styles from './Header.module.scss';
+
 function Header() {
   return (
-    <header className="header">
-      <div className="header-left">
-        <img className="main-logo" src="/img/logo.png" alt="" />
+    <header>
+      <div className={styles.headerLeft}>
+        <img className={styles.mainLogo} src="/img/logo.png" alt="" />
         <div>
           <h3>ПУПИС ШОП</h3>
           <p>Пиздюки всех цветов</p>
         </div>
       </div>
-      <div className="header-right">
+      <div className={styles.headerRight}>
         <ul>
-          <li className="cart">
+          <li className={styles.cart}>
             <svg
-              className="cart-icon"
+              className={styles.cartIcon}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               height={20}
@@ -30,9 +32,9 @@ function Header() {
 
             <p>1488 руб.</p>
           </li>
-          <li className="user-account">
+          <li className={styles.userAccount}>
             <svg
-              className="account-icon"
+              className={styles.accountIcon}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               height={26}

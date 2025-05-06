@@ -1,0 +1,45 @@
+header {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(201, 201, 201, 0.15);
+  p {
+    font-size: 1rem;
+    opacity: 0.5;
+  }
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+
+.mainLogo {
+  height: 50px;
+  width: auto;
+  cursor: pointer;
+}
+
+.headerRight {
+  ul {
+    display: flex;
+    li {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.cart {
+  margin-right: 12px;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+  cursor: pointer;
+  p {
+    margin-left: 5px;
+  }
+}
+
+.accountIcon {
+  cursor: pointer;
+}

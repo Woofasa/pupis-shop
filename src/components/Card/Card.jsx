@@ -1,10 +1,14 @@
+import styles from './Card.module.scss';
+
 function Card(props) {
-  console.log(props);
   return (
-    <div className="card">
-      <button className="like-button">
+    <div className={styles.card}>
+      <button
+        className={styles.likeButton}
+        onClick={props.likeButtonClick}
+      >
         <svg
-          className="like-icon"
+          className={styles.likeIcon}
           xmlns="http://www.w3.org/2000/svg"
           height={22}
           width={22}
@@ -20,16 +24,23 @@ function Card(props) {
           />
         </svg>
       </button>
-      <img className="main-card-pic" src={props.imageURL} alt="jopa" />
+      <img
+        className={styles.mainCardPic}
+        src={props.imageURL}
+        alt="jopa"
+      />
       <h4>{props.name}</h4>
-      <div className="add-product">
-        <div className="price">
+      <div className={styles.addProduct}>
+        <div className={styles.price}>
           <p>Цена:</p>
           <b>{props.price} руб.</b>
         </div>
-        <button className="buy-button">
+        <button
+          className={styles.buyButton}
+          onClick={props.buyButtonClick}
+        >
           <svg
-            className="buy-icon"
+            className={styles.buyIcon}
             height={28}
             width={28}
             xmlns="http://www.w3.org/2000/svg"

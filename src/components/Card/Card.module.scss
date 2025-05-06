@@ -1,0 +1,72 @@
+.card {
+  padding: 30px;
+  width: 200px;
+  border-radius: 20px;
+  box-shadow: 0px 14px 30px rgba(177, 177, 177, 0.1);
+  transition:
+    box-shadow 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
+  cursor: pointer;
+  h4 {
+    margin-bottom: 8px;
+  }
+  &:hover {
+    box-shadow: 0px 14px 30px rgba(78, 78, 78, 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+.mainCardPic {
+  height: 112px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.likeButton {
+  padding: 0;
+  position: absolute;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.likeIcon {
+  opacity: 0.3;
+  &:hover {
+    opacity: 1;
+    fill: rgba(63, 214, 63, 0.7);
+  }
+}
+
+.addProduct {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  p {
+    opacity: 0.7;
+    font-size: 14px;
+  }
+}
+
+.buyButton {
+  background: transparent;
+  padding: 0;
+  border: 1px solid rgb(253, 247, 239);
+  box-sizing: border-box;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.buyIcon {
+  opacity: 0.3;
+  &:hover {
+    opacity: 1;
+    fill: rgba(63, 214, 63, 0.7);
+  }
+}
