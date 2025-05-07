@@ -13,7 +13,7 @@ const arr = [
 function App() {
   return (
     <div className="wrapper default">
-      <CartDrawer />
+      <CartDrawer isOpen={false} />
       <Header />
       <div className="content">
         <div className="content-top">

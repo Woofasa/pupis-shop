@@ -1,4 +1,6 @@
 .drawer {
+  flex-direction: column;
+  z-index: 1;
   position: fixed;
   right: 0;
   top: 0;
@@ -7,9 +9,6 @@
   background: rgb(253, 247, 239);
   box-shadow: -10px 4px 24px rgb(0, 0, 0, 0.3);
   padding: 25px;
-  display: flex;
-  flex-direction: column;
-  z-index: 1;
 }
 
 .drawerHeader {
@@ -18,6 +17,11 @@
   align-items: center;
   padding-bottom: 25px;
   border-bottom: 1px solid rgba(163, 163, 163, 0.1);
+}
+
+.cartWindowClose {
+  border: 0;
+  background: transparent;
 }
 
 .cartXButton {

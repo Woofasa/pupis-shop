@@ -1,6 +1,11 @@
+import { useState } from 'react';
 import styles from './Card.module.scss';
 
 function Card(props) {
+  const [isBuyIconActive, setIsBuyIconActive] = useState(false);
+
+  const handleIsBuyIconActive = () => setIsBuyIconActive(!isBuyIconActive);
+
   return (
     <div className={styles.card}>
       <button
@@ -37,10 +42,10 @@ function Card(props) {
         </div>
         <button
           className={styles.buyButton}
-          onClick={props.buyButtonClick}
+          onClick={handleIsBuyIconActive}
         >
           <svg
-            className={styles.buyIcon}
+            className={`${styles.buyIcon} ${isBuyIconActive ? styles.active : ''}`}
             height={28}
             width={28}
             xmlns="http://www.w3.org/2000/svg"

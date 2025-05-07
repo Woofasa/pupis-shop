@@ -4,7 +4,11 @@ function Header() {
   return (
     <header>
       <div className={styles.headerLeft}>
-        <img className={styles.mainLogo} src="/img/logo.png" alt="" />
+        <img
+          className={styles.mainLogo}
+          src="/img/logo.png"
+          alt=""
+        />
         <div>
           <h3>ПУПИС ШОП</h3>
           <p>Пиздюки всех цветов</p>
