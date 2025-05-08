@@ -1,45 +1,71 @@
 header {
-  padding: 30px;
+  padding: clamp(1rem, 3vw, 1.875rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(201, 201, 201, 0.15);
+  border-bottom: 1px solid hsla(24, 20%, 50%, 0.1);
+  background: var(--bg-wrapper);
   p {
     font-size: 1rem;
-    opacity: 0.5;
+    color: var(--text-secondary);
+    margin: 0;
+    transition: opacity 0.2s;
   }
 }
 
 .headerLeft {
   display: flex;
   align-items: center;
+  gap: 1.25rem;
 }
 
 .mainLogo {
-  height: 50px;
+  height: clamp(2.5rem, 5vw, 3.125rem); // 40px-50px
   width: auto;
   cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05); // Микровзаимодействие
+  }
 }
 
 .headerRight {
   ul {
     display: flex;
-    li {
-      display: flex;
-      align-items: center;
-    }
+    align-items: center;
+    gap: 1.5rem;
+  }
+  li {
+    display: flex;
+    align-items: center;
   }
 }
 
 .cart {
-  margin-right: 12px;
-  border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 0;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--accent); // Акцентный цвет при hover
+    p {
+      opacity: 1;
+      color: var(--text-primary);
+    }
+  }
   p {
-    margin-left: 5px;
+    margin-left: 0.5rem; // 8px
+    font-weight: 500; // Полужирный для важных элементов
   }
 }
 
 .accountIcon {
   cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.2);
+  }
 }

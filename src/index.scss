@@ -1,12 +1,30 @@
+:root {
+  --bg-body: hsl(38, 55%, 95%);
+  --bg-wrapper: hsl(0, 0%, 100%);
+  --text-primary: hsl(4, 32%, 15%);
+  --text-secondary: hsl(24, 20%, 35%);
+  --accent: hsl(18, 80%, 58%);
+  --accent-hover: hsl(18, 80%, 48%);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-accent: 'Manrope', var(--font-primary);
+}
+
 .default {
   * {
-    font-family: 'Inter', system-ui;
+    font-family: var(--font-primary);
     box-sizing: border-box;
     outline: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   input {
     background: transparent;
+    font: inherit;
+    &::placeholder {
+      color: hsl(0, 0%, 70%);
+    }
   }
 
   h1,
@@ -16,62 +34,99 @@
   h5,
   p {
     margin: 0;
+    line-height: 1.5;
   }
 
   a {
     color: inherit;
     text-decoration: none;
+    &:hover {
+      opacity: 0.8; // Интерактивность
+    }
   }
 
   b {
-    font-weight: 500;
+    font-weight: 600;
   }
 
   ul {
     margin: 0;
     padding: 0;
-  }
-
-  li {
-    list-style-type: none;
+    list-style: none;
   }
 }
 
 body {
   margin: 0;
-  background: rgb(248, 235, 222);
-  color: #333;
+  min-height: 100vh;
+  background: var(--bg-body); // HSL для лёгкой модификации
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); // Адаптивный размер шрифта
 }
 
 .wrapper {
-  background: rgb(253, 247, 239);
-  box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
-  max-width: 1080px;
-  margin: 50px auto;
+  background: var(--bg-wrapper);
+  box-shadow: var(--shadow);
+  border-radius: clamp(12px, 2vw, 20px); // Адаптивное скругление
+  max-width: min(1080px, 90vw); // Ограничение ширины + отступы по краям
+  margin: clamp(20px, 5vh, 50px) auto; // Гибкие отступы
+  overflow: hidden; // Для скруглённых углов у детей
 }
 
 .content {
-  padding: 40px 80px;
-  .content-top {
-    margin-bottom: 40px;
+  padding: clamp(20px, 5vw, 40px) clamp(20px, 7vw, 80px); // Адаптивные отступы
+
+  &-top {
+    margin-bottom: 2.5rem; // Использование rem
     display: flex;
+    flex-wrap: wrap; // Запас на мобильные
+    gap: 1rem; // Современный способ отступов
     justify-content: space-between;
     align-items: center;
+
     .search-block {
       display: flex;
       align-items: center;
-      padding: 0 13px;
+      padding: 0.1rem 0.5rem;
+      background: hsl(0, 0%, 98%);
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.2s;
+
+      &:focus-within {
+        box-shadow: 0 0 0 2px hsl(0, 0%, 91%); // Акцент на фокусе
+      }
+
       input {
+        color: var(--text-secondary);
         border: 0;
-        padding: 10px;
+        padding: 0.5rem;
+        min-width: 200px; // Чтобы поле не схлопывалось
+        &::placeholder {
+          color: hsl(0, 0%, 70%);
+        }
       }
     }
   }
-  .card-list {
+  .cardList {
     display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-template-rows: repeat(auto, auto);
-    justify-content: space-between;
+    grid-template-columns: repeat(4, 1fr); // Адаптивная сетка
+    gap: clamp(1rem, 2vw, 1.5rem); // Отступы между карточками
+    justify-content: center; // Центрирование если карточек мало
+    padding: 0;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
   }
 }

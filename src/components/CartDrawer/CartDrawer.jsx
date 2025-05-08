@@ -1,18 +1,14 @@
 import { use, useState } from 'react';
 import styles from './CartDrawer.module.scss';
 
-function CartDrawer() {
-  const [isOpen, setIsOpen] = useState(false);
+function CartDrawer(props) {
   return (
-    <div
-      className={styles.drawer}
-      style={{ display: isOpen ? 'flex' : 'none' }}
-    >
+    <div className={styles.drawer}>
       <div className={styles.drawerHeader}>
         <h2>Корзина</h2>
         <button
           className={styles.cartWindowClose}
-          onClick={() => setIsOpen(false)}
+          onClick={props.onClosePage}
         >
           <img
             className={styles.cartXButton}

@@ -1,7 +1,7 @@
 import Card from './components/Card/Card';
 import Header from './components/Header/Header';
 import CartDrawer from './components/CartDrawer/CartDrawer';
-import { useState } from 'react';
+import { use, useState } from 'react';
 
 const arr = [
   { id: 1, name: 'Кошка срущая', price: 14800, imageURL: '/img/animals/cats/krisa.png' },
@@ -11,10 +11,13 @@ const arr = [
 ];
 
 function App() {
+  const [isCartOpened, setIsCartOpened] = useState(false);
+  const handleIsCartOpened = () => setIsCartOpened(!isCartOpened);
+
   return (
     <div className="wrapper default">
-      <CartDrawer isOpen={false} />
-      <Header />
+      {isCartOpened ? <CartDrawer onClosePage={handleIsCartOpened} /> : undefined}
+      <Header onClickCart={handleIsCartOpened} />
       <div className="content">
         <div className="content-top">
           <h1>Набор пиздюков</h1>
@@ -26,7 +29,7 @@ function App() {
             <input placeholder="Поиск животины..." />
           </div>
         </div>
-        <div className="card-list">
+        <div className="cardList">
           {arr.map((i) => (
             <Card
               key={i.id}

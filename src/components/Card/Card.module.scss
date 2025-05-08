@@ -1,14 +1,22 @@
 .card {
-  padding: 30px;
-  width: 200px;
-  border-radius: 20px;
-  box-shadow: 0px 14px 30px rgba(177, 177, 177, 0.1);
-  transition:
-    box-shadow 0.2s ease-in-out,
-    transform 0.2s ease-in-out;
+  padding: clamp(1.25rem, 3vw, 1.875rem);
+  width: 100%;
+  border-radius: clamp(0.75rem, 2vw, 1.25rem);
+  background: var(--bg-wrapper);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.02),
+    0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
   h4 {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    line-height: 1.4;
   }
   &:hover {
     box-shadow: 0px 14px 30px rgba(78, 78, 78, 0.1);
@@ -17,25 +25,42 @@
 }
 
 .mainCardPic {
-  height: 112px;
   width: 100%;
-  margin-bottom: 8px;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
 }
 
 .likeButton {
   padding: 0;
   position: absolute;
-  box-sizing: border-box;
   background: transparent;
   border: none;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .likeIcon {
-  opacity: 0.3;
+  opacity: 0.5;
+  transition: all 0.2s;
   &:hover {
     opacity: 1;
     fill: rgba(63, 214, 63, 0.7);
+  }
+
+  &:hover {
+    opacity: 1;
+    fill: hsl(0, 80%, 65%);
+  }
+
+  &.active {
+    opacity: 1;
+    fill: hsl(0, 80%, 65%);
   }
 }
 
@@ -43,35 +68,46 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 1rem;
 }
 
 .price {
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
   p {
-    opacity: 0.7;
-    font-size: 14px;
+    opacity: 0.8;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
   }
 }
 
 .buyButton {
   background: transparent;
   padding: 0;
-  border: 1px solid rgb(253, 247, 239);
+  border: 0;
   box-sizing: border-box;
-  border-radius: 8px;
   cursor: pointer;
 }
 
 .buyIcon {
-  opacity: 0.3;
+  opacity: 0.5;
   &:hover {
+    opacity: 1;
+    fill: rgba(63, 214, 63, 0.7);
+  }
+  &.active {
     opacity: 1;
     fill: rgba(63, 214, 63, 0.7);
   }
 }
 
-.buyIcon.active {
-  opacity: 1;
-  fill: rgba(63, 214, 63, 0.7);
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
 }

@@ -2,18 +2,20 @@ import { useState } from 'react';
 import styles from './Card.module.scss';
 
 function Card(props) {
-  const [isBuyIconActive, setIsBuyIconActive] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
-  const handleIsBuyIconActive = () => setIsBuyIconActive(!isBuyIconActive);
+  const handleIsAdded = () => setIsAdded(!isAdded);
+  const handleIsLiked = () => setIsLiked(!isLiked);
 
   return (
     <div className={styles.card}>
       <button
         className={styles.likeButton}
-        onClick={props.likeButtonClick}
+        onClick={handleIsLiked}
       >
         <svg
-          className={styles.likeIcon}
+          className={`${styles.likeIcon} ${isLiked ? styles.active : ''}`}
           xmlns="http://www.w3.org/2000/svg"
           height={22}
           width={22}
@@ -42,10 +44,10 @@ function Card(props) {
         </div>
         <button
           className={styles.buyButton}
-          onClick={handleIsBuyIconActive}
+          onClick={handleIsAdded}
         >
           <svg
-            className={`${styles.buyIcon} ${isBuyIconActive ? styles.active : ''}`}
+            className={`${styles.buyIcon} ${isAdded ? styles.active : ''}`}
             height={28}
             width={28}
             xmlns="http://www.w3.org/2000/svg"

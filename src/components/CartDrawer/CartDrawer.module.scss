@@ -6,9 +6,9 @@
   top: 0;
   bottom: 0;
   width: 420px;
-  background: rgb(253, 247, 239);
+  background: var(--bg-body);
   box-shadow: -10px 4px 24px rgb(0, 0, 0, 0.3);
-  padding: 25px;
+  padding: 2rem;
 }
 
 .drawerHeader {
@@ -25,9 +25,9 @@
 }
 
 .cartXButton {
-  height: 24px;
-  width: 24px;
-  opacity: 0.3;
+  height: 1.5rem;
+  width: 1.5rem;
+  opacity: 0.5;
   cursor: pointer;
   &:hover {
     opacity: 1;
@@ -42,7 +42,7 @@
 .cartItem {
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 1rem;
   border-bottom: 1px solid rgba(163, 163, 163, 0.1);
   p {
     font-size: 14px;
@@ -60,9 +60,10 @@
 }
 
 .cartItemInfo {
-  width: 160px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   overflow: hidden;
-  margin-right: 35px;
 }
 
 .cartTotalPrice {
