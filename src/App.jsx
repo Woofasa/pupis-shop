@@ -1,23 +1,35 @@
 import Card from './components/Card/Card';
 import Header from './components/Header/Header';
 import CartDrawer from './components/CartDrawer/CartDrawer';
-import { use, useState } from 'react';
-
-const arr = [
-  { id: 1, name: 'Кошка срущая', price: 14800, imageURL: '/img/animals/cats/krisa.png' },
-  { id: 2, name: 'Дурында', price: 12342, imageURL: '/img/animals/cats/cat-na-negative.png' },
-  { id: 3, name: 'Срака', price: 12342, imageURL: '/img/animals/cats/cat-srushiy.png' },
-  { id: 4, name: 'Жопа', price: 12342, imageURL: '/img/animals/cats/cat-v-otrube.png' },
-];
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [isCartOpened, setIsCartOpened] = useState(false);
+
+  useEffect(() => {
+    fetch('https://681c7886f74de1d219ac85b1.mockapi.io/items')
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => setItems(json));
+  }, []);
+
   const handleIsCartOpened = () => setIsCartOpened(!isCartOpened);
+  const addToCart = (item) => setCartItems([...cartItems, item]);
 
   return (
     <div className="wrapper default">
-      {isCartOpened ? <CartDrawer onClosePage={handleIsCartOpened} /> : undefined}
+      {isCartOpened && (
+        <CartDrawer
+          cartItems={cartItems}
+          onClosePage={handleIsCartOpened}
+        />
+      )}
+
       <Header onClickCart={handleIsCartOpened} />
+
       <div className="content">
         <div className="content-top">
           <h1>Набор пиздюков</h1>
@@ -30,14 +42,13 @@ function App() {
           </div>
         </div>
         <div className="cardList">
-          {arr.map((i) => (
+          {items.map((item) => (
             <Card
-              key={i.id}
-              name={i.name}
-              price={i.price}
-              imageURL={i.imageURL}
-              likeButtonClick={() => console.log('Добавлено в избранное')}
-              buyButtonClick={() => console.log('Добавлено в корзину')}
+              key={item.id}
+              name={item.name}
+              price={item.price}
+              imageURL={item.imageURL}
+              onAddClick={addToCart}
             />
           ))}
         </div>

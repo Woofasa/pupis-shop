@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import styles from './Card.module.scss';
 
-function Card(props) {
+function Card({ name, price, imageURL, onAddClick }) {
   const [isAdded, setIsAdded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
-  const handleIsAdded = () => setIsAdded(!isAdded);
+  const handleIsAdded = () => {
+    setIsAdded(!isAdded);
+    onAddClick({ name, price, imageURL });
+  };
   const handleIsLiked = () => setIsLiked(!isLiked);
 
   return (
@@ -33,14 +36,14 @@ function Card(props) {
       </button>
       <img
         className={styles.mainCardPic}
-        src={props.imageURL}
+        src={imageURL}
         alt="jopa"
       />
-      <h4>{props.name}</h4>
+      <h4>{name}</h4>
       <div className={styles.addProduct}>
         <div className={styles.price}>
           <p>Цена:</p>
-          <b>{props.price} руб.</b>
+          <b>{price} руб.</b>
         </div>
         <button
           className={styles.buyButton}
