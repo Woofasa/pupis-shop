@@ -18,7 +18,10 @@ function CartDrawer({ cartItems, onClosePage }) {
       </div>
       <div className={styles.cartItems}>
         {cartItems.map((cartItem) => (
-          <div className={styles.cartItem}>
+          <div
+            className={styles.cartItem}
+            key={cartItem.id}
+          >
             <img
               className={styles.cartItemImage}
               src={cartItem.imageURL}

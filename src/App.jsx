@@ -16,19 +16,25 @@ function App() {
       .then((json) => setItems(json));
   }, []);
 
-  const handleIsCartOpened = () => setIsCartOpened(!isCartOpened);
-  const addToCart = (item) => setCartItems([...cartItems, item]);
+  const handleCartWindow = () => setIsCartOpened(!isCartOpened);
+  const addToCart = (item) => {
+    const newItem = {
+      ...item,
+      id: crypto.randomUUID(),
+    };
+    setCartItems([...cartItems, newItem]);
+  };
 
   return (
     <div className="wrapper default">
       {isCartOpened && (
         <CartDrawer
           cartItems={cartItems}
-          onClosePage={handleIsCartOpened}
+          onClosePage={handleCartWindow}
         />
       )}
 
-      <Header onClickCart={handleIsCartOpened} />
+      <Header onClickCart={handleCartWindow} />
 
       <div className="content">
         <div className="content-top">
@@ -44,7 +50,7 @@ function App() {
         <div className="cardList">
           {items.map((item) => (
             <Card
-              key={item.id}
+              key={crypto.randomUUID()}
               name={item.name}
               price={item.price}
               imageURL={item.imageURL}
