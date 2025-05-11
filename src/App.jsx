@@ -7,6 +7,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpened, setIsCartOpened] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     fetch('https://681c7886f74de1d219ac85b1.mockapi.io/items')
@@ -17,12 +18,25 @@ function App() {
   }, []);
 
   const handleCartWindow = () => setIsCartOpened(!isCartOpened);
+
   const addToCart = (item) => {
     const newItem = {
       ...item,
       id: crypto.randomUUID(),
     };
+    setTotalPrice(totalPrice + item.price);
     setCartItems([...cartItems, newItem]);
+  };
+
+  const removeFromCart = (item) => {
+    const updatedCart = cartItems.filter((obj) => obj !== item);
+    setTotalPrice(totalPrice - item.price);
+    setCartItems(updatedCart);
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+    setTotalPrice(0);
   };
 
   return (
@@ -30,11 +44,17 @@ function App() {
       {isCartOpened && (
         <CartDrawer
           cartItems={cartItems}
-          onClosePage={handleCartWindow}
+          closeCartPage={handleCartWindow}
+          removeFromCart={removeFromCart}
+          totalPrice={totalPrice}
+          clearCart={clearCart}
         />
       )}
 
-      <Header onClickCart={handleCartWindow} />
+      <Header
+        onClickCart={handleCartWindow}
+        totalPrice={totalPrice}
+      />
 
       <div className="content">
         <div className="content-top">
@@ -50,7 +70,7 @@ function App() {
         <div className="cardList">
           {items.map((item) => (
             <Card
-              key={crypto.randomUUID()}
+              key={item.id}
               name={item.name}
               price={item.price}
               imageURL={item.imageURL}

@@ -1,13 +1,14 @@
 import styles from './CartDrawer.module.scss';
 
-function CartDrawer({ cartItems, onClosePage }) {
+function CartDrawer({ cartItems, closeCartPage, removeFromCart, totalPrice, clearCart }) {
   return (
     <div className={styles.drawer}>
       <div className={styles.drawerHeader}>
         <h2>Корзина</h2>
+        <button onClick={() => clearCart()}>Очистить корзину</button>
         <button
           className={styles.cartWindowClose}
-          onClick={onClosePage}
+          onClick={closeCartPage}
         >
           <img
             className={styles.cartXButton}
@@ -35,6 +36,7 @@ function CartDrawer({ cartItems, onClosePage }) {
               className={styles.cartXButton}
               src="/img/remove-btn.svg"
               alt="remove"
+              onClick={() => removeFromCart(cartItem)}
             />
           </div>
         ))}
@@ -42,7 +44,7 @@ function CartDrawer({ cartItems, onClosePage }) {
       <ul className={styles.cartTotalPrice}>
         <li>
           <p>Итого:</p>
-          <b>1234 руб.</b>
+          <b>{totalPrice} руб.</b>
         </li>
         <li>
           <p>Скидка:</p>
