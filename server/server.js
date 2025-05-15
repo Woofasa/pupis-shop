@@ -3,25 +3,36 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const bodyParser = require("body-parser");
-const { error } = require("console");
+const cors = require("cors");
 
 const app = express();
-
-const DATA_FILE = path.join(__dirname, "data", "items.json");
-
 app.use(bodyParser.json());
+app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
-if (!fs.existsSync(path.dirname(DATA_FILE))) {
-  fs.mkdirSync(path.dirname(DATA_FILE));
+const ITEM_DATA = path.join(__dirname, "data", "items.json");
+const CART_DATA = path.join(__dirname, "data", "cartItems.json");
+
+function dirCheck(dir) {
+  if (!fs.existsSync(path.dirname(dir))) {
+    fs.mkdirSync(path.dirname(dir));
+  }
+
+  if (!fs.existsSync(dir)) {
+    fs.writeFileSync(dir, "[]");
+  }
 }
 
-if (!fs.existsSync(DATA_FILE)) {
-  fs.writeFileSync(DATA_FILE, "[]");
-}
+dirCheck(ITEM_DATA);
+dirCheck(CART_DATA);
 
-function readData() {
+function readData(dir) {
   try {
-    const data = fs.readFileSync(DATA_FILE, "utf8");
+    const data = fs.readFileSync(dir, "utf8");
     return JSON.parse(data);
   } catch (err) {
     console.error("Ошибка чтения", err);
@@ -29,9 +40,9 @@ function readData() {
   }
 }
 
-function writeData() {
+function writeData(data, dir) {
   try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), "utf8");
+    fs.writeFileSync(dir, JSON.stringify(data, null, 2), "utf8");
     return true;
   } catch (err) {
     console.log("Ошибка записи", err);
@@ -40,20 +51,50 @@ function writeData() {
 }
 
 app.get("/items", (req, res) => {
-  const data = readData();
+  const data = readData(ITEM_DATA);
   res.json(data);
 });
 
-app.get("/items/get", (req, res) => {
-  const { id } = req.body;
-  const data = getData();
-  const item = data.find((item) => item.id === id);
+app.get("/cart", (req, res) => {
+  const data = readData(CART_DATA);
+  res.json(data);
+});
+
+app.get("/cart/:uuid", (req, res) => {
+  const itemUUID = req.params.uuid;
+  const data = readData(CART_DATA);
+  const item = data.find((item) => item.uuid === itemUUID);
 
   if (item) {
     res.json(item);
   } else {
     res.status(404).json({ error: "Файл не найден" });
   }
+});
+
+app.delete("/cart/", (req, res) => {
+  let data = readData(CART_DATA);
+  data = [];
+  writeData(data, CART_DATA);
+  res.sendStatus(204);
+});
+
+app.delete("/cart/:id", (req, res) => {
+  const id = req.params.id;
+  let data = readData(CART_DATA);
+  writeData(
+    data.filter((item) => item.id !== id),
+    CART_DATA
+  );
+  res.sendStatus(204);
+});
+
+app.post("/cart/", (req, res) => {
+  const newItem = req.body;
+  let data = readData(CART_DATA);
+  data.push(newItem);
+  writeData(data, CART_DATA);
+  res.status(201).json(newItem);
 });
 
 app.listen(port, () => {

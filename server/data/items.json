@@ -1,4 +1,26 @@
 [
-  { "id": "1", "name": "Vasya" },
-  { "id": "2", "name": "Vusya" }
+  {
+    "id": 1,
+    "name": "Кошка срущая",
+    "price": 14800,
+    "imageURL": "/img/animals/cats/krisa.png"
+  },
+  {
+    "id": 2,
+    "name": "Дурында",
+    "price": 12342,
+    "imageURL": "/img/animals/cats/cat-na-negative.png"
+  },
+  {
+    "id": 3,
+    "name": "Срака",
+    "price": 12342,
+    "imageURL": "/img/animals/cats/cat-srushiy.png"
+  },
+  {
+    "id": 4,
+    "name": "Жопа",
+    "price": 12342,
+    "imageURL": "/img/animals/cats/cat-v-otrube.png"
+  }
 ]

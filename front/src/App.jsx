@@ -13,31 +13,27 @@ function App() {
   const totalPrice = cartItems.reduce((acc, num) => acc + num.price, 0);
 
   useEffect(() => {
-    axios
-      .get('https://681c7886f74de1d219ac85b1.mockapi.io/items')
-      .then((res) => setItems(res.data));
-    axios
-      .get('https://681c7886f74de1d219ac85b1.mockapi.io/cart')
-      .then((res) => setCartItems(res.data));
+    axios.get('http://localhost:4000/items').then((res) => setItems(res.data));
+    axios.get('http://localhost:4000/cart').then((res) => setCartItems(res.data));
   }, []);
 
   const handleCartWindow = () => setIsCartOpened(!isCartOpened);
 
   const addToCart = async (item) => {
-    const r = await axios.post('https://681c7886f74de1d219ac85b1.mockapi.io/cart', item);
+    const generatedId = { ...item, id: crypto.randomUUID() };
+    const r = await axios.post('http://localhost:4000/cart', generatedId);
     setCartItems((prev) => [...prev, r.data]);
+    console.log(`${generatedId.id} добавлен`);
   };
 
   const removeFromCart = (id) => {
-    axios.delete(`https://681c7886f74de1d219ac85b1.mockapi.io/cart/${id}`);
+    axios.delete(`http://localhost:4000/cart/${id}`);
     setCartItems(cartItems.filter((obj) => obj.id !== id));
+    console.log(`${id} удалён`);
   };
 
   const clearCart = async () => {
-    const clearCart = cartItems.map((item) =>
-      axios.delete(`https://681c7886f74de1d219ac85b1.mockapi.io/cart/${item.id}`)
-    );
-    await Promise.all(clearCart);
+    axios.delete(`http://localhost:4000/cart/`);
 
     setCartItems([]);
   };
